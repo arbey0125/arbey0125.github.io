@@ -5,7 +5,7 @@ const currentTimeEl = document.getElementById('current-time');
 const totalTimeEl = document.getElementById('total-time');
 const playBtn = document.getElementById('play-btn');
 const prevBtn = document.getElementById('prev-btn');
-const nextBtn = document.getElementById('next-btn');w
+const nextBtn = document.getElementById('next-btn');
 const rewindBtn = document.getElementById('rewind-btn');
 const shuffleBtn = document.getElementById('shuffle-btn');
 const repeatBtn = document.getElementById('repeat-btn');
@@ -275,7 +275,7 @@ function renderMediaContent() {
     return;
   }
   if (showVideo) {
-    mediaContent.innerHTML = `<video src="${currentSong.video}" controls autoplay muted poster="FOTO 1.jpg" loop></video>`;
+    mediaContent.innerHTML = `<video src="${currentSong.video}" controls autoplay muted poster="FOTO 1.jpg"></video>`;
     toggleMediaBtn.textContent = 'Solo Audio';
   } else {
     mediaContent.innerHTML = `<img src="FOTO 1.jpg" alt="Portada" />`;
