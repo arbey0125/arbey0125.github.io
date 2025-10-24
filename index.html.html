@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌞 Simulador Solar Avanzado - Optimización Multivariable</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjs@11.11.0/lib/browser/math.min.js"></script>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <i class="fas fa-solar-panel"></i>
+            <span>SolarSim Pro</span>
+        </div>
+        <div class="nav-links">
+            <a href="#simulador" class="nav-link active">
+                <i class="fas fa-calculator"></i>
+                Simulador
+            </a>
+            <a href="#resultados" class="nav-link">
+                <i class="fas fa-chart-line"></i>
+                Resultados
+            </a>
+            <a href="#ayuda" class="nav-link">
+                <i class="fas fa-question-circle"></i>
+                Ayuda
+            </a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        <span class="gradient-text">Simulador Solar Avanzado</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        Optimización Multivariable para Sistemas Solares Híbridos
+                    </p>
+                    <p class="hero-description">
+                        Analiza y optimiza el rendimiento de sistemas solares aplicando cálculo multivariable, 
+                        derivadas parciales y modelado térmico avanzado para almacenamiento y tratamiento de agua.
+                    </p>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <i class="fas fa-bolt"></i>
+                            <span>Energía Solar</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-thermometer-half"></i>
+                            <span>Almacenamiento Térmico</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-tint"></i>
+                            <span>Tratamiento de Agua</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="solar-animation">
+                        <div class="sun">
+                            <i class="fas fa-sun"></i>
+                        </div>
+                        <div class="panels">
+                            <div class="panel"></div>
+                            <div class="panel"></div>
+                            <div class="panel"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Dashboard -->
+        <div class="dashboard">
+            <!-- Control Panel -->
+            <div class="control-panel">
+                <div class="panel-header">
+                    <i class="fas fa-cog"></i>
+                    <h3>Configuración del Sistema</h3>
+                    <div class="panel-toggle">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+                
+                <div class="panel-content">
+                    <div class="input-section">
+                        <div class="section-header">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <h4>Ubicación Geográfica</h4>
+                        </div>
+                        <div class="input-grid">
+                            <div class="input-field">
+                                <label for="latitud">
+                                    <i class="fas fa-globe"></i>
+                                    Latitud
+                                </label>
+                                <input type="number" id="latitud" value="19.4326" step="0.0001" min="-90" max="90" placeholder="19.4326">
+                                <span class="unit">°</span>
+                            </div>
+                            <div class="input-field">
+                                <label for="longitud">
+                                    <i class="fas fa-globe"></i>
+                                    Longitud
+                                </label>
+                                <input type="number" id="longitud" value="-99.1332" step="0.0001" min="-180" max="180" placeholder="-99.1332">
+                                <span class="unit">°</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-section">
+                        <div class="section-header">
+                            <i class="fas fa-calendar-alt"></i>
+                            <h4>Configuración Temporal</h4>
+                        </div>
+                        <div class="input-grid">
+                            <div class="input-field">
+                                <label for="fecha">
+                                    <i class="fas fa-calendar"></i>
+                                    Fecha de simulación
+                                </label>
+                                <input type="date" id="fecha" value="2024-06-21">
+                            </div>
+                            <div class="input-field">
+                                <label for="duracion">
+                                    <i class="fas fa-clock"></i>
+                                    Duración
+                                </label>
+                                <input type="number" id="duracion" value="1" min="1" max="365" placeholder="1">
+                                <span class="unit">días</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-section">
+                        <div class="section-header">
+                            <i class="fas fa-solar-panel"></i>
+                            <h4>Configuración de Paneles</h4>
+                        </div>
+                        <div class="input-grid">
+                            <div class="input-field">
+                                <label for="numPaneles">
+                                    <i class="fas fa-th"></i>
+                                    Número de paneles
+                                </label>
+                                <input type="number" id="numPaneles" value="20" min="1" max="1000" placeholder="20">
+                            </div>
+                            <div class="input-field">
+                                <label for="areaPanel">
+                                    <i class="fas fa-expand-arrows-alt"></i>
+                                    Área por panel
+                                </label>
+                                <input type="number" id="areaPanel" value="2.0" step="0.1" min="0.1" max="10" placeholder="2.0">
+                                <span class="unit">m²</span>
+                            </div>
+                            <div class="input-field">
+                                <label for="inclinacion">
+                                    <i class="fas fa-angle-up"></i>
+                                    Inclinación
+                                </label>
+                                <input type="number" id="inclinacion" value="30" min="0" max="90" placeholder="30">
+                                <span class="unit">°</span>
+                            </div>
+                            <div class="input-field">
+                                <label for="azimut">
+                                    <i class="fas fa-compass"></i>
+                                    Orientación
+                                </label>
+                                <input type="number" id="azimut" value="180" min="0" max="360" placeholder="180">
+                                <span class="unit">°</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-section">
+                        <div class="section-header">
+                            <i class="fas fa-thermometer-half"></i>
+                            <h4>Propiedades Térmicas</h4>
+                        </div>
+                        <div class="input-grid">
+                            <div class="input-field">
+                                <label for="capacidadCalorifica">
+                                    <i class="fas fa-fire"></i>
+                                    Capacidad calorífica
+                                </label>
+                                <input type="number" id="capacidadCalorifica" value="4180" step="10" min="1000" max="10000" placeholder="4180">
+                                <span class="unit">J/kg·K</span>
+                            </div>
+                            <div class="input-field">
+                                <label for="masaTermica">
+                                    <i class="fas fa-weight"></i>
+                                    Masa térmica
+                                </label>
+                                <input type="number" id="masaTermica" value="1000" step="10" min="100" max="10000" placeholder="1000">
+                                <span class="unit">kg</span>
+                            </div>
+                            <div class="input-field">
+                                <label for="difusividadTermica">
+                                    <i class="fas fa-wave-square"></i>
+                                    Difusividad térmica
+                                </label>
+                                <input type="number" id="difusividadTermica" value="1.4e-7" step="1e-8" min="1e-8" max="1e-5" placeholder="1.4e-7">
+                                <span class="unit">m²/s</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-section">
+                        <div class="section-header">
+                            <i class="fas fa-tint"></i>
+                            <h4>Tratamiento de Agua</h4>
+                        </div>
+                        <div class="input-grid">
+                            <div class="input-field">
+                                <label for="eficienciaTratamiento">
+                                    <i class="fas fa-percentage"></i>
+                                    Eficiencia de tratamiento
+                                </label>
+                                <input type="number" id="eficienciaTratamiento" value="85" min="50" max="100" placeholder="85">
+                                <span class="unit">%</span>
+                            </div>
+                            <div class="input-field">
+                                <label for="energiaPorLitro">
+                                    <i class="fas fa-bolt"></i>
+                                    Energía por litro
+                                </label>
+                                <input type="number" id="energiaPorLitro" value="0.5" step="0.1" min="0.1" max="5" placeholder="0.5">
+                                <span class="unit">Wh/L</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="simulation-controls">
+                        <button id="ejecutarSimulacion" class="btn-simulate">
+                            <i class="fas fa-play"></i>
+                            <span>Ejecutar Simulación</span>
+                            <div class="btn-glow"></div>
+                        </button>
+                        <button id="resetSimulacion" class="btn-reset">
+                            <i class="fas fa-redo"></i>
+                            <span>Resetear</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Dashboard -->
+            <div class="results-dashboard">
+                <div class="dashboard-header">
+                    <h2>
+                        <i class="fas fa-chart-line"></i>
+                        Resultados de Simulación
+                    </h2>
+                    <div class="dashboard-controls">
+                        <button class="btn-export">
+                            <i class="fas fa-download"></i>
+                            Exportar
+                        </button>
+                        <button class="btn-fullscreen">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Key Metrics -->
+                <div class="metrics-grid">
+                    <div class="metric-card energy">
+                        <div class="metric-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="metric-content">
+                            <h4>Energía Solar</h4>
+                            <div class="metric-value" id="energiaTotal">0</div>
+                            <div class="metric-unit">Wh</div>
+                            <div class="metric-trend">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+12%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="metric-card temperature">
+                        <div class="metric-icon">
+                            <i class="fas fa-thermometer-half"></i>
+                        </div>
+                        <div class="metric-content">
+                            <h4>Temperatura Máxima</h4>
+                            <div class="metric-value" id="temperaturaMax">0</div>
+                            <div class="metric-unit">°C</div>
+                            <div class="metric-trend">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+5°C</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="metric-card water">
+                        <div class="metric-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <div class="metric-content">
+                            <h4>Agua Tratada</h4>
+                            <div class="metric-value" id="aguaTratada">0</div>
+                            <div class="metric-unit">L/día</div>
+                            <div class="metric-trend">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+8%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="metric-card efficiency">
+                        <div class="metric-icon">
+                            <i class="fas fa-percentage"></i>
+                        </div>
+                        <div class="metric-content">
+                            <h4>Eficiencia Global</h4>
+                            <div class="metric-value" id="eficienciaGlobal">0</div>
+                            <div class="metric-unit">%</div>
+                            <div class="metric-trend">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+3%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gráficos Interactivos -->
+                <div class="charts-container">
+                    <div class="chart-container">
+                        <h4>☀️ Irradiancia Solar por Hora</h4>
+                        <canvas id="irradianciaChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h4>🌡️ Evolución Térmica del Sistema</h4>
+                        <canvas id="temperaturaChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h4>📈 Eficiencia vs Parámetros</h4>
+                        <canvas id="eficienciaChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Sistema de Diagnóstico Inteligente -->
+                <div class="diagnostic-panel">
+                    <div class="diagnostic-header">
+                        <h3>
+                            <i class="fas fa-stethoscope"></i>
+                            Diagnóstico del Sistema
+                        </h3>
+                        <div class="health-score">
+                            <div class="score-circle">
+                                <div class="score-value" id="healthScore">0</div>
+                                <div class="score-label">Salud</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Métricas de Salud -->
+                    <div class="health-metrics">
+                        <div class="health-metric">
+                            <div class="metric-label">
+                                <i class="fas fa-solar-panel"></i>
+                                Eficiencia Solar
+                            </div>
+                            <div class="metric-bar">
+                                <div class="metric-fill" id="solarEfficiency" style="width: 0%"></div>
+                            </div>
+                            <div class="metric-value" id="solarEfficiencyValue">0%</div>
+                        </div>
+                        
+                        <div class="health-metric">
+                            <div class="metric-label">
+                                <i class="fas fa-thermometer-half"></i>
+                                Estabilidad Térmica
+                            </div>
+                            <div class="metric-bar">
+                                <div class="metric-fill" id="thermalStability" style="width: 0%"></div>
+                            </div>
+                            <div class="metric-value" id="thermalStabilityValue">0%</div>
+                        </div>
+                        
+                        <div class="health-metric">
+                            <div class="metric-label">
+                                <i class="fas fa-tint"></i>
+                                Producción de Agua
+                            </div>
+                            <div class="metric-bar">
+                                <div class="metric-fill" id="waterProduction" style="width: 0%"></div>
+                            </div>
+                            <div class="metric-value" id="waterProductionValue">0%</div>
+                        </div>
+                    </div>
+
+                    <!-- Alertas y Recomendaciones -->
+                    <div class="diagnostic-content">
+                        <div class="alerts-section">
+                            <h4>
+                                <i class="fas fa-exclamation-triangle"></i>
+                                Alertas del Sistema
+                            </h4>
+                            <div class="alerts-container" id="alertsContainer">
+                                <!-- Las alertas se generarán dinámicamente -->
+                            </div>
+                        </div>
+
+                        <div class="recommendations-section">
+                            <h4>
+                                <i class="fas fa-lightbulb"></i>
+                                Recomendaciones de Optimización
+                            </h4>
+                            <div class="recommendations-container" id="recommendationsContainer">
+                                <!-- Las recomendaciones se generarán dinámicamente -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Análisis de Derivadas Parciales -->
+                <div class="derivatives-panel">
+                    <h4>🧮 Análisis de Derivadas Parciales</h4>
+                    <div class="derivatives-grid">
+                        <div class="derivative-card">
+                            <h5>∂T/∂θ (Inclinación)</h5>
+                            <div class="derivative-value" id="derivadaInclinacion">0</div>
+                            <div class="derivative-desc">Sensibilidad térmica a la inclinación</div>
+                        </div>
+                        <div class="derivative-card">
+                            <h5>∂E/∂A (Área)</h5>
+                            <div class="derivative-value" id="derivadaArea">0</div>
+                            <div class="derivative-desc">Sensibilidad energética al área</div>
+                        </div>
+                        <div class="derivative-card">
+                            <h5>∂T/∂t (Tiempo)</h5>
+                            <div class="derivative-value" id="derivadaTiempo">0</div>
+                            <div class="derivative-desc">Velocidad de cambio térmico</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel Explicativo Inferior -->
+        <div class="explanatory-panel">
+            <h3>🔬 Interpretación Física y Recomendaciones</h3>
+            
+            <div class="explanation-grid">
+                <div class="explanation-card">
+                    <h4>📖 Interpretación de Resultados</h4>
+                    <div id="interpretacionFisica">
+                        <p>Los resultados muestran el comportamiento del sistema solar híbrido bajo las condiciones especificadas. Las derivadas parciales indican la sensibilidad del sistema a cambios en los parámetros de entrada.</p>
+                    </div>
+                </div>
+                
+                <div class="explanation-card">
+                    <h4>💡 Recomendaciones de Optimización</h4>
+                    <div id="recomendaciones">
+                        <ul>
+                            <li>Ajustar la inclinación según la latitud para maximizar la captación solar</li>
+                            <li>Optimizar la orientación (azimut) hacia el sur (hemisferio norte)</li>
+                            <li>Balancear la masa térmica para estabilidad vs respuesta rápida</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="explanation-card">
+                    <h4>🌍 Impacto Sostenible</h4>
+                    <div id="impactoSostenible">
+                        <p>Este sistema contribuye a la sostenibilidad energética mediante el aprovechamiento de energía solar renovable para el tratamiento de agua, reduciendo la dependencia de fuentes no renovables.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
